@@ -23,13 +23,17 @@ try{
   const commentCollection=client.db('italy').collection('comments');
   
 
-   app.get('/places',async(req,res)=>{      
+
+   app.get('/allplaces',async(req,res)=>{      
     const query ={};
     const cursor=placesCollection.find(query);
     const place=await cursor.toArray();
     res.send(place);
 
    })
+
+
+
 
 
   //  .............
