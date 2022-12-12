@@ -24,7 +24,7 @@ try{
   
 
 
-   app.get('/allplaces',async(req,res)=>{      
+   app.get('/places',async(req,res)=>{      
     const query ={};
     const cursor=placesCollection.find(query);
     const place=await cursor.toArray();
