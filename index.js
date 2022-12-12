@@ -11,7 +11,7 @@ app.use(express.json());
 
 //......................................................
 
- const uri=`mongodb+srv://cityitaly:FmcUZGB0NRWjbeMP@cluster0.unjca9b.mongodb.net/?retryWrites=true&w=majority`;
+ const uri="mongodb+srv://cityitaly:FmcUZGB0NRWjbeMP@cluster0.unjca9b.mongodb.net/?retryWrites=true&w=majority";
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
