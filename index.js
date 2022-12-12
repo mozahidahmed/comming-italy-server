@@ -10,21 +10,24 @@ app.use(express.json());
 
 //......................................................
 
- const uri="mongodb+srv://cityitaly:FmcUZGB0NRWjbeMP@cluster0.unjca9b.mongodb.net/?retryWrites=true&w=majority";
+//  const uri="mongodb+srv://cityitaly:FmcUZGB0NRWjbeMP@cluster0.unjca9b.mongodb.net/?retryWrites=true&w=majority";
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
+const uri = "mongodb+srv://service:WqppylUxViB54LVR@cluster0.ro517.mongodb.net/?retryWrites=true&w=majority";
+
+ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
  
 
 async function run(){
 try{
   await client.connect();
-  const placesCollection=client.db('italy').collection('places');
-  const commentCollection=client.db('italy').collection('comments');
+  const placesCollection=client.db('tour-italy').collection('places');
+  // const commentCollection=client.db('italy').collection('comments');
 
 
-  
+
    app.get('/places',async(req,res)=>{      
     const query ={};
     const cursor=placesCollection.find(query);
