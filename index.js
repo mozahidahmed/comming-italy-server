@@ -24,7 +24,7 @@ async function run(){
 try{
   await client.connect();
   const placesCollection=client.db('tour-italy').collection('places');
-  // const commentCollection=client.db('italy').collection('comments');
+   const commentCollection=client.db('tour-italy').collection('comments');
 
 
 
@@ -35,6 +35,29 @@ try{
     res.send(place);
 
    })
+   
+  //  ............
+  app.get('/places/:id',async(req,res)=>{
+    const id=req.params.id;
+    const query={_id: ObjectId(id)}
+    const comment=await placesCollection.findOne(query);
+    res.send(comment)
+  })
+  // ............ 
+   app.put('/places/:id',async (req,res)=>{
+    const id=req.params.id;
+    const query ={_id: ObjectId(id)};
+    const body=req.body;
+    const options={upsert:true}
+    const updateDoc={
+      $set:{
+        likes:body.likes
+
+      }
+    }
+    const like=await placesCollection.updateOne(query,updateDoc,options)
+    res.send(like)
+    })
 
 
 
@@ -42,20 +65,20 @@ try{
 
   //  .............
   app.post('/comments',async (req,res)=>{
-  
     const comment=req.body;
     console.log(comment)
     const comments =await commentCollection.insertOne(comment)
     res.send(comments)
     })
 
+
   app.get('/comments',async (req,res)=>{
-  
     const query ={};
     const cursor=commentCollection.find(query);
     const comments=await cursor.toArray();
     res.send(comments);
     })
+
 
     app.get('/comments/:id',async(req,res)=>{
       const id=req.params.id;
@@ -79,32 +102,6 @@ try{
 
   //  .............
 
-  //  ............
-   app.get('/places/:id',async(req,res)=>{
-    const id=req.params.id;
-    const query={_id: ObjectId(id)}
-    const comment=await placesCollection.findOne(query);
-    res.send(comment)
-  })
-  // ............ 
-
-
-
-
-   app.put('/places/:id',async (req,res)=>{
-    const id=req.params.id;
-    const query ={_id: ObjectId(id)};
-    const body=req.body;
-    const options={upsert:true}
-    const updateDoc={
-      $set:{
-        likes:body.likes
-
-      }
-    }
-    const like=await placesCollection.updateOne(query,updateDoc,options)
-    res.send(like)
-    })
 
    
   
