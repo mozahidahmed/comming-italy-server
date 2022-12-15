@@ -23,8 +23,12 @@ const uri = "mongodb+srv://service:WqppylUxViB54LVR@cluster0.ro517.mongodb.net/?
 async function run(){
 try{
   await client.connect();
+
+  
   const placesCollection=client.db('tour-italy').collection('places');
-   const commentCollection=client.db('tour-italy').collection('comments');
+  const commentCollection=client.db('tour-italy').collection('comments');
+  const hotelCollection=client.db('tour-italy').collection('hotel');
+ 
 
 
 
@@ -95,15 +99,25 @@ try{
       res.send({name: isAdmin})
       
       })
-
-
-     
-        
-
   //  .............
 
 
-   
+
+  // ....
+  app.get('/hotel',async(req,res)=>{      
+    const query ={};
+    const cursor=hotelCollection.find(query);
+    const hotel=await cursor.toArray();
+    res.send(hotel);
+
+   })
+
+   app.get('/hotel/:id',async(req,res)=>{
+    const id=req.params.id;
+    const query={_id: ObjectId(id)}
+    const hotel=await hotelCollection.findOne(query);
+    res.send(hotel)
+  })
   
 
 
