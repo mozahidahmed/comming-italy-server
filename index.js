@@ -76,29 +76,31 @@ try{
     })
 
 
+
+    // app.get('/allcomments',async(req,res)=>{      
+    //   const query ={};
+    //   const cursor= commentCollection.find(query);
+    //   const place=await cursor.toArray();
+    //   res.send(place);
+  
+    //  })
+
+
   app.get('/comments',async (req,res)=>{
-    const query ={};
-    const cursor=commentCollection.find(query);
-    const comments=await cursor.toArray();
+    const name =req.query.name;
+    const query={name:name}
+    const comments= await commentCollection.find(query).toArray();
     res.send(comments);
     })
 
 
-    app.get('/comments/:id',async(req,res)=>{
-      const id=req.params.id;
-      const query={_id: ObjectId(id)}
-      const comment=await commentCollection.findOne(query);
-      res.send(comment)
-    })
 
 
-      app.get('/comments/:name',async (req,res)=>{
-      const name=req.params.name;
-      const user=await commentCollection.findOne({name: name});
-      const isAdmin=user.name === 'name';
-      res.send({name: isAdmin})
-      
-      })
+
+  
+
+
+    
   //  .............
 
 
