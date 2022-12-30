@@ -28,6 +28,7 @@ try{
   const placesCollection=client.db('tour-italy').collection('places');
   const commentCollection=client.db('tour-italy').collection('comments');
   const hotelCollection=client.db('tour-italy').collection('hotel');
+  const restaurantCollection=client.db('tour-italy').collection('restaurant');
  
 
 
@@ -124,7 +125,13 @@ try{
 
 
 
-  
+  app.get('/restaurant',async(req,res)=>{      
+    const query ={};
+    const cursor=restaurantCollection.find(query);
+    const hotel=await cursor.toArray();
+    res.send(hotel);
+
+   })
 
 
 
